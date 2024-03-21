@@ -1,0 +1,1 @@
+This is where the AuthModule model files go
