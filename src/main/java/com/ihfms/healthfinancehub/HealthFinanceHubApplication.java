@@ -15,6 +15,7 @@ public class HealthFinanceHubApplication {
     public static void main(String[] args) {
         SpringApplication.run(HealthFinanceHubApplication.class, args);
 
+        // these are for testing the user factories, but they can be implemented as services in the authmodule
         UserFactory userFactory = new AdminUserFactory();
         User adminStaff = userFactory.createUser(Role.ADMIN);
         adminStaff.writeName();
