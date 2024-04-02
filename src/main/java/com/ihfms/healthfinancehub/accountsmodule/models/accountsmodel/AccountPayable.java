@@ -1,11 +1,12 @@
 package com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AccountPayable {
     private Long payableId;
     private Double amount;
-    private Date payableDate;
+    private LocalDate payableDate;
     private Status status;
 
 }

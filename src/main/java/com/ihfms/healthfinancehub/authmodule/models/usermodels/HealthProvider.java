@@ -1,8 +1,9 @@
-package com.ihfms.healthfinancehub.entities.usermodels;
+package com.ihfms.healthfinancehub.authmodule.models.usermodels;
 
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.healthmodule.models.MedicalRecord;
 import com.ihfms.healthfinancehub.healthmodule.models.Patient;
+import com.ihfms.healthfinancehub.messagingmodule.messagemodel.ChatMessage;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -28,5 +29,9 @@ public class HealthProvider extends User{
         return new ArrayList<>();
     }
 
+    @Override
+    public void onMessageReceived(ChatMessage message) {
+        System.out.println("HealthProvider received message "+message.getContent());
+    }
 
 }

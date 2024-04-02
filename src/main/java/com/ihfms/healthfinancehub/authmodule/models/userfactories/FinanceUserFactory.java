@@ -1,9 +1,8 @@
-package com.ihfms.healthfinancehub.entities.userfactories;
+package com.ihfms.healthfinancehub.authmodule.models.userfactories;
 
-import com.ihfms.healthfinancehub.entities.usermodels.AdminStaff;
-import com.ihfms.healthfinancehub.entities.usermodels.FinanceStaff;
-import com.ihfms.healthfinancehub.entities.usermodels.Role;
-import com.ihfms.healthfinancehub.entities.usermodels.User;
+import com.ihfms.healthfinancehub.authmodule.models.usermodels.FinanceStaff;
+import com.ihfms.healthfinancehub.authmodule.models.usermodels.User;
+import com.ihfms.healthfinancehub.authmodule.models.usermodels.Role;
 
 public class FinanceUserFactory implements UserFactory{
 
