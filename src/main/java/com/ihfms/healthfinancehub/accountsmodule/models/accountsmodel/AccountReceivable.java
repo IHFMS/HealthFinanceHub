@@ -1,12 +1,15 @@
 package com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel;
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 public class AccountReceivable {
 
     private Long receivableId;
     private Double amount;
-    private Date receivableDate;
+
+    private LocalDate receivableDate;
+
     private Status status;
 
 }
