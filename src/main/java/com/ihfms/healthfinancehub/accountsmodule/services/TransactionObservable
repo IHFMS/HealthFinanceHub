@@ -1,0 +1,35 @@
+package com.ihfms.healthfinancehub.accountsmodule.services;
+
+import com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel.Transaction;
+import com.ihfms.healthfinancehub.accountsmodule.observers.TransactionObserver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class TransactionObservable {
+    private final List<TransactionObserver> observers = new ArrayList<>();
+
+    @Autowired
+    private LoggingObserver loggingObserver;
+
+    public void addObserver(TransactionObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(TransactionObserver observer) {
+        observers.remove(observer);
+    }
+
+    public void recordTransaction(Transaction transaction) {
+        notifyObservers(transaction);
+    }
+
+    private void notifyObservers(Transaction transaction) {
+        for (TransactionObserver observer : observers) {
+            observer.update(transaction);
+        }
+    }
+}
