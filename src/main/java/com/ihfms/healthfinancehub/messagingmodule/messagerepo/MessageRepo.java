@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+// storing messages sent
 @Repository
 public class MessageRepo {
 

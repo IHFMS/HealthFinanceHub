@@ -5,6 +5,7 @@ import com.ihfms.healthfinancehub.messagingmodule.messageobservable.ChatObservab
 import com.ihfms.healthfinancehub.messagingmodule.messagingservice.ChatService;
 import org.springframework.web.bind.annotation.*;
 
+// adding chat service as an observer
 @RestController
 @RequestMapping("health-hub")
 public class SubscribeController{
