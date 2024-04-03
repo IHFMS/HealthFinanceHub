@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class Invoice {
 
-    private int invoiceId;
+    private Long invoiceId;
     private Double amount;
     private LocalDate issueDate;
     private LocalDate dueDate;

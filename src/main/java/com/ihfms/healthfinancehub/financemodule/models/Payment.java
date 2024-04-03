@@ -7,13 +7,10 @@ import java.time.LocalDate;
 @Data
 public class Payment {
 
-    private int transactionId;
+    private Long transactionId;
     private LocalDate paymentDate;
     private Double amount;
     private String type;
 
-    private void processPayment(){
-
-    }
 }
 

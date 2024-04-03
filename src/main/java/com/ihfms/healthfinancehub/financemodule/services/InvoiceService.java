@@ -8,14 +8,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 @Service
 public class InvoiceService {
 
     public Invoice generateInvoice(){
 
+        // to generate a random UUID for an invoice
+        Random rand = new Random();
+
         Invoice invoice = new Invoice();
-        invoice.setInvoiceId(123);
+        invoice.setInvoiceId(rand.nextLong());
         invoice.setIssueDate(LocalDate.now());
         invoice.setDueDate(LocalDate.of(2024, 12, 1));
         invoice.setAmount(1000.0);
