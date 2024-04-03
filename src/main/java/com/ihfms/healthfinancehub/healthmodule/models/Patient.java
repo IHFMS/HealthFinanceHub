@@ -3,7 +3,6 @@ package com.ihfms.healthfinancehub.healthmodule.models;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class Patient {
@@ -20,4 +19,5 @@ public class Patient {
         this.dateOfBirth = dateOfBirth;
         this.contact = contact;
     }
+
 }

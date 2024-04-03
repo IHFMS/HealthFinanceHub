@@ -1,9 +1,8 @@
-package com.ihfms.healthfinancehub.authmodule.models.usermodels;
+package com.ihfms.healthfinancehub.entities.usermodels;
 
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.healthmodule.models.MedicalRecord;
 import com.ihfms.healthfinancehub.healthmodule.models.Patient;
-
 import lombok.Data;
 
 import java.util.ArrayList;
