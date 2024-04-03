@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// implements singleton
 public class DBConfig {
     private static DBConfig instance;
     private Connection connection;
