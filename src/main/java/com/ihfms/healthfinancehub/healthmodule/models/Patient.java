@@ -4,13 +4,11 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-
 @Data
 public class Patient {
 
     private Long patientId;
     private String name;
-
     private LocalDate dateOfBirth;
     private String contact;
     private MedicalRecord medicalRecord;
