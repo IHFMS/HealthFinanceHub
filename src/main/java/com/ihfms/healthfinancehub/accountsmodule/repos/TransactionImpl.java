@@ -1,11 +1,17 @@
 package com.ihfms.healthfinancehub.accountsmodule.repos;
 
 import com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel.Invoice;
+import com.ihfms.healthfinancehub.utils.SecondaryDb;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class TransactionImpl implements TransactionManager {
+    private SecondaryDb db ;
+    public TransactionImpl(SecondaryDb database){
+        this.db = database;
+    }
 
     @Override
     public Invoice captureTransaction(String patientId, int amount){
@@ -33,16 +39,37 @@ public class TransactionImpl implements TransactionManager {
 
     @Override
     public List<Invoice> getAllPendingTransaction() {
-        return null;
+        return db.invoiceList;
+
     }
 
     @Override
     public List<Invoice> getNotPendingTransaction() {
-        return null;
+        List<Invoice> notPendingTransactions = new ArrayList<>();
+        for (Invoice invoice : db.invoiceList) {
+            if (!invoice.getIsPaid()) {
+                notPendingTransactions.add(invoice);
+            }
+        }
+        return notPendingTransactions;
     }
 
     @Override
-    public int getDifferenceOfTransaction() {
-        return 0;
+    public int getDifferenceOfTransaction(SecondaryDb db)
+    {
+        int pendingCount = 0;
+        int notPendingCount = 0;
+
+        for (Invoice invoice : db.invoiceList) {
+            if (invoice.getIsPaid()) {
+                pendingCount++;
+            } else {
+                notPendingCount++;
+            }
+        }
+
+        return pendingCount - notPendingCount;
     }
 }
+
+

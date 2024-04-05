@@ -1,6 +1,7 @@
 package com.ihfms.healthfinancehub.accountsmodule.repos;
 
 import com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel.Invoice;
+import com.ihfms.healthfinancehub.utils.SecondaryDb;
 
 import java.util.List;
 
@@ -13,9 +14,10 @@ public interface TransactionManager {
 
     public List<Invoice> getNotPendingTransaction();
 
-    public int getDifferenceOfTransaction();
 
 
+
+   public int getDifferenceOfTransaction(SecondaryDb db);
 }
 
 
