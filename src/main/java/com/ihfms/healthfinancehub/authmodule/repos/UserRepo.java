@@ -15,7 +15,7 @@ public class UserRepo {
     Connection conn = dbConfig.getConnection();
 
     public void insertUser(User user) throws SQLException {
-        String sql = "INSERT INTO users (userID, username, email, password, role) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO users (userid, username, email, password, role) VALUES (?, ?, ?, ?, ?);";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, user.getUserID());
@@ -26,7 +26,6 @@ public class UserRepo {
         statement.executeUpdate();
 
     }
-
 
 
 }
