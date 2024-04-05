@@ -1,6 +1,6 @@
 package com.ihfms.healthfinancehub.utils;
 
-import com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel.Invoice;
+import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 
 import java.util.ArrayList;
 import java.util.List;

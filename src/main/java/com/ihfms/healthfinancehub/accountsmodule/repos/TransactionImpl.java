@@ -1,6 +1,6 @@
 package com.ihfms.healthfinancehub.accountsmodule.repos;
 
-import com.ihfms.healthfinancehub.accountsmodule.models.accountsmodel.Invoice;
+import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.utils.SecondaryDb;
 
 import java.util.ArrayList;
@@ -13,11 +13,12 @@ public class TransactionImpl implements TransactionManager {
         this.db = database;
     }
 
+
     @Override
-    public Invoice captureTransaction(String patientId, int amount){
+    public Invoice captureTransaction(Long patientId, Double amount) {
         String transactionId= UUID.randomUUID().toString();
         Invoice invoice=new Invoice();
-        invoice.setId(transactionId);
+        invoice.setInvoiceId(transactionId);
         invoice.setAmount(amount);
         invoice.setPatientId(patientId);
         invoice.setIsPaid(false);
