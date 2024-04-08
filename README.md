@@ -4,3 +4,5 @@ The project aims to develop an Integrated Health Finance Management System (IHFM
 
 Notes:
 - As soon as an invoice is created, an accounts receivable must be generated (meaning accounts receivable can be implemented as an observer)
+- ChatController could implement ChatObserver, and pass into its constructor
+  - chatObservable.add(this) to add it as an observer
