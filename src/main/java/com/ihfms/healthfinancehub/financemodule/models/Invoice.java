@@ -1,8 +1,6 @@
 package com.ihfms.healthfinancehub.financemodule.models;
 
-import com.ihfms.healthfinancehub.healthmodule.models.Patient;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Data
