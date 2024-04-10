@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>Chat Room</h1>
+    <div>
+        <form th:action="@{/health-hub/sendMessage}" method="post">
+            <input type="hidden" name="sender" value="trev"/>
+            <input type="text" name="messageContent"/>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
     <div th:each="message: ${messages}">
         <div>
             <span>Message: </span>
