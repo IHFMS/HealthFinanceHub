@@ -12,6 +12,7 @@ public class InvoiceService {
     public Invoice generateInvoice(){
 
         // to generate a random UUID for an invoice
+
         UUID uuid = UUID.randomUUID();
 
         Invoice invoice = new Invoice();
