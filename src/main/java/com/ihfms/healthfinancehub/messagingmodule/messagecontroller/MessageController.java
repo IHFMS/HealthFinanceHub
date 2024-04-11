@@ -3,8 +3,9 @@ package com.ihfms.healthfinancehub.messagingmodule.messagecontroller;
 import com.ihfms.healthfinancehub.messagingmodule.messagemodel.ChatMessage;
 
 import com.ihfms.healthfinancehub.messagingmodule.messageobservable.ChatObservable;
-import com.ihfms.healthfinancehub.messagingmodule.messagingservice.ChatService;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalTime;
 
@@ -17,9 +18,13 @@ public class MessageController {
         this.chatObservable = chatObservable;
     }
 
-    // broadcasting message
+    // broadcasting the message
     @PostMapping("/sendMessage")
-    public ChatMessage sendMessage(@RequestBody String messageContent, @RequestParam String sender) {
+    public ModelAndView sendMessage(
+            @RequestParam("messageContent") String messageContent,
+            @RequestParam String sender,
+            ModelMap modelMap
+    ) {
         ChatMessage message = new ChatMessage();
         message.setSender(sender);
         message.setContent(messageContent);
@@ -27,7 +32,9 @@ public class MessageController {
 
         chatObservable.notifyChatObservers(message);
 
-        return message;
+        modelMap.addAttribute("messages", message);
+
+        return new ModelAndView("redirect:/health-hub/receive-messages");
     }
 
 }
