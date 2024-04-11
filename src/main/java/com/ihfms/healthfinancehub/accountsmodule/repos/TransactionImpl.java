@@ -2,49 +2,56 @@ package com.ihfms.healthfinancehub.accountsmodule.repos;
 
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.utils.SecondaryDb;
+import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
-public class TransactionImpl implements TransactionManager {
-    private SecondaryDb db ;
-    public TransactionImpl(SecondaryDb database){
-        this.db = database;
+@Service
+public class TransactionImpl {
+
+    private final SecondaryDb db;
+    private AccountsRepo accountsRepo;
+
+    public TransactionImpl(SecondaryDb db, AccountsRepo accountsRepo) {
+        this.db = db;
+        this.accountsRepo = accountsRepo;
     }
 
+    public void captureTransaction(Long patientId, Double amount) {
 
-    @Override
-    public Invoice captureTransaction(Long patientId, Double amount) {
-        String transactionId= UUID.randomUUID().toString();
+        Random random = new Random();
+        Date currentDate = new Date(System.currentTimeMillis());
+
+        // Convert to java.sql.Date
+        java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
+
+
+        long transactionId= random.nextLong(100);
         Invoice invoice=new Invoice();
         invoice.setInvoiceId(transactionId);
         invoice.setAmount(amount);
+        invoice.setIssueDate(sqlDate);
         invoice.setPatientId(patientId);
         invoice.setIsPaid(false);
 
+        accountsRepo.generateInvoice(invoice);
 
-
-
-        return invoice;
     }
 
-    @Override
     public List<Invoice> getAllTransaction() {
         List<Invoice> invoiceList;
-
-
 
         return null;
     }
 
-    @Override
     public List<Invoice> getAllPendingTransaction() {
+        accountsRepo.getAllPending();
         return db.invoiceList;
-
     }
 
-    @Override
     public List<Invoice> getNotPendingTransaction() {
         List<Invoice> notPendingTransactions = new ArrayList<>();
         for (Invoice invoice : db.invoiceList) {
@@ -55,8 +62,7 @@ public class TransactionImpl implements TransactionManager {
         return notPendingTransactions;
     }
 
-    @Override
-    public int getDifferenceOfTransaction(SecondaryDb db)
+    public int getDifferenceOfTransaction()
     {
         int pendingCount = 0;
         int notPendingCount = 0;

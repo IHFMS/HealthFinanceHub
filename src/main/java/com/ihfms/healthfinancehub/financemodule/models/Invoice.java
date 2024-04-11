@@ -1,15 +1,15 @@
 package com.ihfms.healthfinancehub.financemodule.models;
 
 import lombok.Data;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Data
 public class Invoice {
 
-    private String invoiceId;
+    private Long invoiceId;
     private Double amount;
-    private LocalDate issueDate;
-    private LocalDate dueDate;
+    private Date issueDate;
+    private Date dueDate;
     Boolean isPaid;
     private Long patientId;
 
