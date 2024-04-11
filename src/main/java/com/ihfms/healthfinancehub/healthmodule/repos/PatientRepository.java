@@ -16,77 +16,67 @@ public class PatientRepository {
     DBConfig dbConfig = DBConfig.getInstance();
     Connection conn = dbConfig.getConnection();
 
-//    public List<Patient> getPatientInfo(){
-//
-//        List<Patient> patientList = new ArrayList<>();
-//        MedicalRecord record = new MedicalRecord();
-//
-//        String sql = "SELECT patient.patient_id, patient.patient_name, patient.date_of_birth, patient.contact, medical_record.record_id, medical_record.diagnosis, medical_record.prescriptions " +
-//                "FROM patient " +
-//                "INNER JOIN medical_record ON patient.patient_id = medical_record.record_id";
-//
-//        PreparedStatement statement = null;
-//        try {
-//
-//            statement = conn.prepareStatement(sql);
-//            ResultSet resultSet = statement.executeQuery();
-//
-//            while (resultSet.next()){
-//                Long patientId = resultSet.getLong("patient_id");
-//                String name = resultSet.getString("patient_name");
-//                Date dob = resultSet.getDate("date_of_birth");
-//                String contact = resultSet.getString("contact");
-//
-//                Long recordId = resultSet.getLong("record_id");
-//                String diagnosis = resultSet.getString("diagnosis");
-//                String prescription = resultSet.getString("prescriptions");
-//
-//                List<String> prescriptions = new ArrayList<>();
-//                prescriptions.add(prescription);
-//
-//                record.setRecordId(recordId);
-//                record.setDiagnosis(diagnosis);
-//                record.setMedicationPrescriptions(prescriptions);
-//
-//                Patient patient = new Patient(patientId, name, dob, contact, record);
-//                patientList.add(patient);
-//            }
-//            return patientList;
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
+    public List<MedicalRecord> getMedicalRecords(){
+        String sql = "Select * FROM medical_record;";
+        List<MedicalRecord> medicalRecordList = new ArrayList<>();
 
-//    public MedicalRecord getMedicalRecord(){
-//        String sql = "Select * FROM medical_record;";
-//        MedicalRecord record = new MedicalRecord();
-//
-//        try {
-//            PreparedStatement statement = conn.prepareStatement(sql);
-//            ResultSet resultSet = statement.executeQuery();
-//
-//            while (resultSet.next()){
-//                Long id = resultSet.getLong("record_id");
-//                String diagnosis = resultSet.getString("diagnosis");
-//                String prescription = resultSet.getString("prescriptions");
-//
-//                List<String> prescriptions = new ArrayList<>();
-//                prescriptions.add(prescription);
-//
-//                record.setRecordId(id);
-//                record.setDiagnosis(diagnosis);
-//                record.setMedicationPrescriptions(prescriptions);
-//            }
-//            return record;
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                Long id = resultSet.getLong("record_id");
+                String diagnosis = resultSet.getString("diagnosis");
+                String prescription = resultSet.getString("prescriptions");
+
+                List<String> prescriptions = new ArrayList<>();
+                prescriptions.add(prescription);
+
+                MedicalRecord record = new MedicalRecord();
+
+                record.setRecordId(id);
+                record.setDiagnosis(diagnosis);
+                record.setMedicationPrescriptions(prescriptions);
+
+                medicalRecordList.add(record);
+            }
+            return medicalRecordList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public MedicalRecord getMedicalRecord(Long patientId){
+        String sql = "Select * FROM medical_record WHERE patient_id_fk = ?;";
+        MedicalRecord record = new MedicalRecord();
+
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, patientId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                Long id = resultSet.getLong("record_id");
+                String diagnosis = resultSet.getString("diagnosis");
+                String prescription = resultSet.getString("prescriptions");
+
+                List<String> prescriptions = new ArrayList<>();
+                prescriptions.add(prescription);
+
+                record.setRecordId(id);
+                record.setDiagnosis(diagnosis);
+                record.setMedicationPrescriptions(prescriptions);
+            }
+            return record;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public List<Patient> getPatientDetails() {
 
