@@ -15,14 +15,14 @@ import java.sql.SQLException;
 public class PaymentService
 {
     private final PaymentRepository paymentRepository;
-    private Billing billing;
+    private Billing bill;
     private PaymentService(PaymentRepository paymentRepository)
     {
         this.paymentRepository = paymentRepository;
     }
-    public void setPayment(Billing billing)
+    private void setPayment(Billing billing)
     {
-        this.billing = billing;
+        this.bill = billing;
     }
     public void selectPayment(@RequestBody PaymentInfo paymentInfo) throws SQLException {
         String mode = paymentInfo.getPaymentMode();
@@ -30,17 +30,20 @@ public class PaymentService
         {
             case "mm":
                 setPayment(new MobileMoney());
+                break;
             case "card":
                 setPayment(new Card());
+                break;
             default:
                 setPayment(new Cash());
+                break;
         }
 
-        paymentRepository.save(paymentInfo);
         MakePayment();
+        //paymentRepository.save(paymentInfo);
     }
     private void MakePayment()
     {
-        billing.ProcessPayment();
+        bill.ProcessPayment();
     }
 }

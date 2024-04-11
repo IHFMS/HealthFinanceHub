@@ -12,7 +12,7 @@ public class AccountPayable {
 
     private LocalDate payableDate;
 
-    private Date payableDate;
+//    private Date payableDate;
 
     private Status status;
 

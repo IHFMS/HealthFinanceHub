@@ -4,21 +4,16 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
+import java.sql.Date;
 
 @Data
 public class PaymentInfo
 {
-    @Getter
     private int paymentId;
-    @Getter
     private String patientName;
-    @Getter
     private int amount;
-    @Getter
     private String payFor;
-    @Setter
     private String paymentMode;
-    @Getter
-    private LocalDate date;
+    private Date date;
 }
