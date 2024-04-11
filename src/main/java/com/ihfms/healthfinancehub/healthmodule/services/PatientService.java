@@ -1,5 +1,6 @@
 package com.ihfms.healthfinancehub.healthmodule.services;
 
+import com.ihfms.healthfinancehub.healthmodule.models.MedicalRecord;
 import com.ihfms.healthfinancehub.healthmodule.models.Patient;
 import com.ihfms.healthfinancehub.healthmodule.repos.PatientRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,14 @@ public class PatientService{
 
     public List<Patient> getPatientList(){
         return patientRepository.getPatientDetails();
+    }
+
+    public List<MedicalRecord> getRecordList(){
+        return patientRepository.getMedicalRecords();
+    }
+
+    public MedicalRecord getMedicalRecord(Long patientId){
+        return patientRepository.getMedicalRecord(patientId);
     }
 
     public void addPatientRecord(Long patientId, String diagnosis, List<String> prescriptions){

@@ -3,13 +3,14 @@ package com.ihfms.healthfinancehub.accountsmodule.repos;
 import com.ihfms.healthfinancehub.entities.datasource.DBConfig;
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.utils.SecondaryDb;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -40,7 +41,7 @@ public class AccountsRepo {
 
     }
 
-    public void getAllPending(){
+    public List<Invoice> getAllPending(){
 
         SecondaryDb secondaryDb = SecondaryDb.getInstance();
 
@@ -52,10 +53,10 @@ public class AccountsRepo {
             preparedStatement.setBoolean(1, false);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            // create an instance of invoice to store results from db into invoice object
-            Invoice invoice = new Invoice();
-
             while (resultSet.next()){
+                // create an instance of invoice to store results from db into invoice object
+                Invoice invoice = new Invoice();
+
                 // set fields of invoice object with the column data
                 invoice.setInvoiceId(resultSet.getLong("invoice_id"));
                 invoice.setAmount(resultSet.getDouble("amount"));
@@ -67,9 +68,11 @@ public class AccountsRepo {
                 // add the invoice to the list
                 secondaryDb.invoiceList.add(invoice);
             }
+            return secondaryDb.invoiceList;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
 
     }

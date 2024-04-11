@@ -1,5 +1,6 @@
 package com.ihfms.healthfinancehub.healthmodule.controllers;
 
+import com.ihfms.healthfinancehub.healthmodule.models.MedicalRecord;
 import com.ihfms.healthfinancehub.healthmodule.models.Patient;
 import com.ihfms.healthfinancehub.healthmodule.services.PatientService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,16 @@ public class PatientController {
     @GetMapping("/get-patients")
     public List<Patient> getPatients(){
         return patientService.getPatientList();
+    }
+
+    @GetMapping("/get-records")
+    public List<MedicalRecord> getRecords(){
+        return patientService.getRecordList();
+    }
+
+    @GetMapping("/get-record/{patient_id}")
+    public MedicalRecord getRecordById(@PathVariable("patient_id") Long patientId){
+        return patientService.getMedicalRecord(patientId);
     }
 
     @PostMapping("/add-record/{patient_id}")

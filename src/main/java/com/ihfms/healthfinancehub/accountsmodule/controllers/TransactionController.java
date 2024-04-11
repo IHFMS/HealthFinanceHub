@@ -14,7 +14,7 @@
 
 package com.ihfms.healthfinancehub.accountsmodule.controllers;
 
-import com.ihfms.healthfinancehub.accountsmodule.repos.TransactionImpl;
+import com.ihfms.healthfinancehub.accountsmodule.services.TransactionImpl;
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import org.springframework.web.bind.annotation.*;
 

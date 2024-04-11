@@ -1,5 +1,6 @@
-package com.ihfms.healthfinancehub.accountsmodule.repos;
+package com.ihfms.healthfinancehub.accountsmodule.services;
 
+import com.ihfms.healthfinancehub.accountsmodule.repos.AccountsRepo;
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import com.ihfms.healthfinancehub.utils.SecondaryDb;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,7 @@ public class TransactionImpl {
     }
 
     public List<Invoice> getAllPendingTransaction() {
-        accountsRepo.getAllPending();
-        return db.invoiceList;
+        return accountsRepo.getAllPending();
     }
 
     public List<Invoice> getNotPendingTransaction() {
