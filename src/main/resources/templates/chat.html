@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HealthHub</title>
-</head>
-<body>
-    <h1>Chat Room</h1>
-    <div>
-        <form th:action="@{/health-hub/sendMessage}" method="post">
-            <input type="hidden" name="sender" value="trev"/>
-            <input type="text" name="messageContent"/>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-    <div th:each="message: ${messages}">
+    <head>
+        <meta charset="UTF-8">
+        <title>HealthHub</title>
+    </head>
+    <body>
+        <h1>Chat Room</h1>
         <div>
-            <span>Message: </span>
-            <span th:text="${message.getContent()}"></span>
+            <form th:action="@{/health-hub/sendMessage}" method="post">
+                <input type="hidden" name="sender" value="trev"/>
+                <input type="text" name="messageContent"/>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
-    </div>
+        <div th:each="message: ${messages}">
+            <div>
+                <span>Message: </span>
+                <span th:text="${message.getContent()}"></span>
+            </div>
+        </div>
 
-</body>
+    </body>
 </html>
