@@ -1,15 +1,13 @@
 package com.ihfms.healthfinancehub.authmodule.controllers;
 import com.ihfms.healthfinancehub.authmodule.models.usermodels.*;
 import com.ihfms.healthfinancehub.authmodule.services.FinanceStaffService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
 @RestController
 @RequestMapping("health-hub/finance-staff")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FinanceStaffController {
 
     private final FinanceStaffService financeStaffService;

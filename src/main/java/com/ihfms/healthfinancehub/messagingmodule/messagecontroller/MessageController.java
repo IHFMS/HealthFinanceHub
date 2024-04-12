@@ -11,6 +11,7 @@ import java.time.LocalTime;
 
 @RestController
 @RequestMapping("health-hub")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MessageController {
 
     private final ChatObservable chatObservable;

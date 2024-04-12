@@ -1,6 +1,5 @@
 package com.ihfms.healthfinancehub.authmodule.controllers;
 
-import com.ihfms.healthfinancehub.authmodule.models.usermodels.AdminStaff;
 import com.ihfms.healthfinancehub.authmodule.models.usermodels.User;
 import com.ihfms.healthfinancehub.authmodule.services.AdminService;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("health-hub/admin")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
     private final AdminService adminService;
