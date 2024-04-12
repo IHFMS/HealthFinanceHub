@@ -15,9 +15,9 @@ public class DBConfig {
         // Initialize database connection
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5478/ihfms2";
-            String username = "nantjami@gmail.com";
-            String password = "0000";
+            String url = "jdbc:postgresql://localhost:5432/healthhub";
+            String username = "postgres";
+            String password = "postgres";
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
