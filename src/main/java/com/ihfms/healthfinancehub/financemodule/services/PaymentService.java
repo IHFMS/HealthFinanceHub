@@ -1,7 +1,6 @@
 package com.ihfms.healthfinancehub.financemodule.services;
 
 import com.ihfms.healthfinancehub.financemodule.models.PaymentInfo;
-import com.ihfms.healthfinancehub.financemodule.models.paymentmodes.Billing;
 import com.ihfms.healthfinancehub.financemodule.models.paymentmodes.Card;
 import com.ihfms.healthfinancehub.financemodule.models.paymentmodes.Cash;
 import com.ihfms.healthfinancehub.financemodule.models.paymentmodes.MobileMoney;
@@ -15,35 +14,36 @@ import java.sql.SQLException;
 public class PaymentService
 {
     private final PaymentRepository paymentRepository;
-    private Billing bill;
-    private PaymentService(PaymentRepository paymentRepository)
+    private final PaymentContext paymentContext;
+    private PaymentService(PaymentRepository paymentRepository, PaymentContext paymentContext)
     {
         this.paymentRepository = paymentRepository;
-    }
-    private void setPayment(Billing billing)
-    {
-        this.bill = billing;
+        this.paymentContext = paymentContext;
     }
     public void selectPayment(@RequestBody PaymentInfo paymentInfo) throws SQLException {
         String mode = paymentInfo.getPaymentMode();
         switch(mode)
         {
-            case "mm":
-                setPayment(new MobileMoney());
+            case "mobile":
+                paymentContext.setPayment(new MobileMoney());
                 break;
             case "card":
-                setPayment(new Card());
+                paymentContext.setPayment(new Card());
+                break;
+            case "cash":
+                paymentContext.setPayment(new Cash());
                 break;
             default:
-                setPayment(new Cash());
+                System.out.println("Invalid Option!!");
                 break;
         }
 
-        MakePayment();
+        paymentContext.MakePayment();
+        ValidatePayment();
         //paymentRepository.save(paymentInfo);
     }
-    private void MakePayment()
+    private void ValidatePayment()
     {
-        bill.ProcessPayment();
+        System.out.println("Payment Successful.");
     }
 }

@@ -4,6 +4,5 @@ public class Cash implements Billing
 {
     @Override
     public void ProcessPayment()
-    {
-    }
+    {}
 }

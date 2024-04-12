@@ -1,9 +1,6 @@
 package com.ihfms.healthfinancehub.financemodule.models;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 //import java.time.LocalDate;
 import java.sql.Date;
 

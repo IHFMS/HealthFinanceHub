@@ -18,12 +18,11 @@ public class PaymentController
 
     @PostMapping
     public void RegisterPayment(@RequestBody PaymentInfo paymentInfo) throws SQLException {
-        System.out.println(paymentInfo);
         paymentService.selectPayment(paymentInfo);
     }
 
-    @GetMapping("/test")
-    public String test(){
-        return "Hello test";
-    }
+//    @GetMapping("/test")
+//    public String test(){
+//        return "Hello test";
+//    }
 }
