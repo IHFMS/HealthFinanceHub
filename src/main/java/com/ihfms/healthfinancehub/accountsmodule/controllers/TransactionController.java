@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("health-hub/transactions")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
 
 //    private final TransactionManager transactionManager;
@@ -30,7 +31,7 @@ public class TransactionController {
 //        this.transactionManager = transactionManager;
 //    }
 
-    private TransactionImpl transaction;
+    private final TransactionImpl transaction;
 
     public TransactionController(TransactionImpl transaction) {
         this.transaction = transaction;
