@@ -1,27 +1,40 @@
 package com.ihfms.healthfinancehub.messagingmodule.messagecontroller;
 
 import com.ihfms.healthfinancehub.messagingmodule.messagemodel.ChatMessage;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.ihfms.healthfinancehub.messagingmodule.messageobservable.ChatObservable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalTime;
 
 @RestController
+@RequestMapping("health-hub")
 public class MessageController {
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage message){
-        return message;
+    private final ChatObservable chatObservable;
+    public MessageController(ChatObservable chatObservable) {
+        this.chatObservable = chatObservable;
     }
 
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        // Add username to WebSocket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        return chatMessage;
+    // broadcasting the message
+    @PostMapping("/sendMessage")
+    public ModelAndView sendMessage(
+            @RequestParam("messageContent") String messageContent,
+            @RequestParam String sender,
+            ModelMap modelMap
+    ) {
+        ChatMessage message = new ChatMessage();
+        message.setSender(sender);
+        message.setContent(messageContent);
+        message.setTimestamp(LocalTime.now());
+
+        chatObservable.notifyChatObservers(message);
+
+        modelMap.addAttribute("messages", message);
+
+        return new ModelAndView("redirect:/health-hub/receive-messages");
     }
 
 }

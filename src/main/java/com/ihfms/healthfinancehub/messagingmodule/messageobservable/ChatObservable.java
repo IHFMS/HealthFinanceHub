@@ -2,10 +2,12 @@ package com.ihfms.healthfinancehub.messagingmodule.messageobservable;
 
 import com.ihfms.healthfinancehub.messagingmodule.messagemodel.ChatMessage;
 import com.ihfms.healthfinancehub.messagingmodule.messageobserver.ChatObserver;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ChatObservable {
 
     private final List<ChatObserver> chatObservers = new ArrayList<>();

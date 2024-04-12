@@ -5,11 +5,10 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class AccountReceivable {
+public class GeneralLedger {
 
-    private Long receivableId;
+    private Long entryId;
     private Double amount;
-    private LocalDate receivableDate;
-    private Status status;
+    private LocalDate accountDate;
 
 }
