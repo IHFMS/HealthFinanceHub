@@ -27,7 +27,7 @@ public class TransactionImpl implements TransactionService {
         Date currentDate = new Date(System.currentTimeMillis());
 
         // Convert to java.sql.Date
-        java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
+        Date sqlDate = new Date(currentDate.getTime());
 
 
         long transactionId= random.nextLong(100);
@@ -43,22 +43,28 @@ public class TransactionImpl implements TransactionService {
     }
 
     public List<Invoice> getAllTransaction() {
-        List<Invoice> invoiceList;
-
-        return null;
+        return accountsRepo.getAllTransactions();
     }
 
     public List<Invoice> getAllPendingTransaction() {
-        return accountsRepo.getAllPending();
+        List<Invoice> pendingTransactions = accountsRepo.getAllPending();
+        for (Invoice invoice : pendingTransactions) {
+            if (!invoice.getIsPaid()) {
+                db.invoiceList.add(invoice);
+            }
+        }
+        System.out.println("From getPending" + db.invoiceList);
+        return pendingTransactions;
     }
 
     public List<Invoice> getNotPendingTransaction() {
-        List<Invoice> notPendingTransactions = new ArrayList<>();
-        for (Invoice invoice : db.invoiceList) {
-            if (!invoice.getIsPaid()) {
-                notPendingTransactions.add(invoice);
+        List<Invoice> notPendingTransactions = accountsRepo.getNotPending();
+        for (Invoice invoice : notPendingTransactions) {
+            if (invoice.getIsPaid()) {
+                db.invoiceList.add(invoice);
             }
         }
+        System.out.println("From getNotPending" + db.invoiceList);
         return notPendingTransactions;
     }
 
@@ -68,7 +74,7 @@ public class TransactionImpl implements TransactionService {
         int notPendingCount = 0;
 
         for (Invoice invoice : db.invoiceList) {
-            if (invoice.getIsPaid()) {
+            if (!invoice.getIsPaid()) {
                 pendingCount++;
             } else {
                 notPendingCount++;

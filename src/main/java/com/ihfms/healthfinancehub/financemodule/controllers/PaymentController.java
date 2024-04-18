@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("health-hub/makePayment")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PaymentController
 {
     private final PaymentService paymentService;

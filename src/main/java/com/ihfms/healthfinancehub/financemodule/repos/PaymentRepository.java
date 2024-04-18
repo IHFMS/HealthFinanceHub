@@ -17,14 +17,18 @@ public class PaymentRepository
 
     public void save(PaymentInfo paymentInfo) throws SQLException
     {
-        String sql = "INSERT INTO ihfms (paymentId, patientName, amount, payFor, date) VALUES (?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO payment (transaction_id, payment_date, amount, pay_for, patient_name) VALUES (?, ?, ?, ?, ?);";
+
+        Date date = new Date(System.currentTimeMillis());
+        Date current = new Date(date.getTime());
 
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, paymentInfo.getPaymentId());
-        statement.setString(2, paymentInfo.getPatientName());
+        statement.setDate(2, current);
         statement.setLong(3, paymentInfo.getAmount());
         statement.setString(4, paymentInfo.getPayFor());
-        statement.setDate(5, (paymentInfo.getDate()));
+        statement.setString(5, paymentInfo.getPatientName());
+
         statement.executeUpdate();
     }
 }

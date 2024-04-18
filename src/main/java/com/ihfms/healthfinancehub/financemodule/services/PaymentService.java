@@ -40,7 +40,7 @@ public class PaymentService
 
         paymentContext.MakePayment();
         ValidatePayment();
-        //paymentRepository.save(paymentInfo);
+        paymentRepository.save(paymentInfo);
     }
     private void ValidatePayment()
     {

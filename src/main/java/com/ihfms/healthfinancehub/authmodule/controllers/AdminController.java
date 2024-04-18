@@ -17,7 +17,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping
+    @PostMapping
     public User registerAdmin(
         @RequestParam(required = false) String username,
         @RequestParam(required = false) String email,
