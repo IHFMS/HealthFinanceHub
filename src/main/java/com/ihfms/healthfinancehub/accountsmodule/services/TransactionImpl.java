@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class TransactionImpl {
+public class TransactionImpl implements TransactionService {
 
     private final SecondaryDb db;
     private AccountsRepo accountsRepo;
