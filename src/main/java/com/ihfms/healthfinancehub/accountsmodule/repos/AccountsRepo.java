@@ -45,8 +45,6 @@ public class AccountsRepo {
 
         List<Invoice> invoiceList = new ArrayList<>();
 
-
-
         String sql = "SELECT * FROM invoice;";
 
         try {

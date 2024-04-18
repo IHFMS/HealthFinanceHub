@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class TransactionImpl {
+public class TransactionImpl implements TransactionService {
 
     private final SecondaryDb db;
-    private AccountsRepo accountsRepo;
+    private final AccountsRepo accountsRepo;
 
     public TransactionImpl(SecondaryDb db, AccountsRepo accountsRepo) {
         this.db = db;
