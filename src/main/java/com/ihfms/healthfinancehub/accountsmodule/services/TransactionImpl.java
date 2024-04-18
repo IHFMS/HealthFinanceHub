@@ -43,22 +43,28 @@ public class TransactionImpl {
     }
 
     public List<Invoice> getAllTransaction() {
-        List<Invoice> invoiceList;
-
-        return null;
+        return accountsRepo.getAllTransactions();
     }
 
     public List<Invoice> getAllPendingTransaction() {
-        return accountsRepo.getAllPending();
+        List<Invoice> pendingTransactions = accountsRepo.getAllPending();
+        for (Invoice invoice : pendingTransactions) {
+            if (!invoice.getIsPaid()) {
+                db.invoiceList.add(invoice);
+            }
+        }
+        System.out.println("From getPending" + db.invoiceList);
+        return pendingTransactions;
     }
 
     public List<Invoice> getNotPendingTransaction() {
-        List<Invoice> notPendingTransactions = new ArrayList<>();
-        for (Invoice invoice : db.invoiceList) {
-            if (!invoice.getIsPaid()) {
-                notPendingTransactions.add(invoice);
+        List<Invoice> notPendingTransactions = accountsRepo.getNotPending();
+        for (Invoice invoice : notPendingTransactions) {
+            if (invoice.getIsPaid()) {
+                db.invoiceList.add(invoice);
             }
         }
+        System.out.println("From getNotPending" + db.invoiceList);
         return notPendingTransactions;
     }
 
@@ -68,7 +74,7 @@ public class TransactionImpl {
         int notPendingCount = 0;
 
         for (Invoice invoice : db.invoiceList) {
-            if (invoice.getIsPaid()) {
+            if (!invoice.getIsPaid()) {
                 pendingCount++;
             } else {
                 notPendingCount++;

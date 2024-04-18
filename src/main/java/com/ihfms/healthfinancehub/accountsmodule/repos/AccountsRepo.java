@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,9 +41,47 @@ public class AccountsRepo {
 
     }
 
+    public List<Invoice> getAllTransactions(){
+
+        List<Invoice> invoiceList = new ArrayList<>();
+
+
+
+        String sql = "SELECT * FROM invoice;";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                // create an instance of invoice to store results from db into invoice object
+                Invoice invoice = new Invoice();
+
+                // set fields of invoice object with the column data
+                invoice.setInvoiceId(resultSet.getLong("invoice_id"));
+                invoice.setAmount(resultSet.getDouble("amount"));
+                invoice.setIssueDate(resultSet.getDate("issue_date"));
+                invoice.setDueDate(resultSet.getDate("due_date"));
+                invoice.setPatientId(resultSet.getLong("patient_id_fk"));
+                invoice.setIsPaid(resultSet.getBoolean("is_paid"));
+
+                // add the invoice to the list
+                invoiceList.add(invoice);
+            }
+            return invoiceList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     public List<Invoice> getAllPending(){
 
-        SecondaryDb secondaryDb = SecondaryDb.getInstance();
+        List<Invoice> invoiceList = new ArrayList<>();
+        int pending = 0;
 
         String sql = "SELECT * FROM invoice WHERE is_paid = ?;";
 
@@ -64,10 +103,53 @@ public class AccountsRepo {
                 invoice.setPatientId(resultSet.getLong("patient_id_fk"));
                 invoice.setIsPaid(resultSet.getBoolean("is_paid"));
 
+                pending++;
+
                 // add the invoice to the list
-                secondaryDb.invoiceList.add(invoice);
+                invoiceList.add(invoice);
             }
-            return secondaryDb.invoiceList;
+            System.out.println("Pending: " + pending);
+            return invoiceList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public List<Invoice> getNotPending(){
+
+        List<Invoice> invoiceList = new ArrayList<>();
+        int notPending = 0;
+
+        String sql = "SELECT * FROM invoice WHERE is_paid = ?;";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setBoolean(1, true);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                // create an instance of invoice to store results from db into invoice object
+                Invoice invoice = new Invoice();
+
+                // set fields of invoice object with the column data
+                invoice.setInvoiceId(resultSet.getLong("invoice_id"));
+                invoice.setAmount(resultSet.getDouble("amount"));
+                invoice.setIssueDate(resultSet.getDate("issue_date"));
+                invoice.setDueDate(resultSet.getDate("due_date"));
+                invoice.setPatientId(resultSet.getLong("patient_id_fk"));
+                invoice.setIsPaid(resultSet.getBoolean("is_paid"));
+
+                notPending++;
+
+                // add the invoice to the list
+                invoiceList.add(invoice);
+            }
+            System.out.println("Not pending: " + notPending);
+            return invoiceList;
 
         } catch (SQLException e) {
             e.printStackTrace();
