@@ -16,7 +16,7 @@ public class FinanceStaffController {
         this.financeStaffService = financeStaffService;
     }
 
-    @GetMapping
+    @PostMapping
     public User registerFinanceUser(
         @RequestParam(required = false) String username,
         @RequestParam(required = false) String email,

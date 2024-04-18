@@ -25,12 +25,6 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
 
-//    private final TransactionManager transactionManager;
-//
-//    public TransactionController(TransactionManager transactionManager) {
-//        this.transactionManager = transactionManager;
-//    }
-
     private final TransactionImpl transaction;
 
     public TransactionController(TransactionImpl transaction) {

@@ -20,22 +20,24 @@ public class MessageController {
     }
 
     // broadcasting the message
+//    @PostMapping("/sendMessage")
+//    public void sendMessage(
+//            @RequestBody String messageContent,
+//            @RequestBody String sender
+//    ) {
+//        ChatMessage message = new ChatMessage();
+//        message.setSender(sender);
+//        message.setContent(messageContent);
+//        message.setTimestamp(LocalTime.now());
+//
+//        chatObservable.notifyChatObservers(message);
+//    }
+
     @PostMapping("/sendMessage")
-    public ModelAndView sendMessage(
-            @RequestParam("messageContent") String messageContent,
-            @RequestParam String sender,
-            ModelMap modelMap
-    ) {
-        ChatMessage message = new ChatMessage();
-        message.setSender(sender);
-        message.setContent(messageContent);
+    public void sendMessage(@RequestBody ChatMessage message) {
         message.setTimestamp(LocalTime.now());
-
         chatObservable.notifyChatObservers(message);
-
-        modelMap.addAttribute("messages", message);
-
-        return new ModelAndView("redirect:/health-hub/receive-messages");
     }
+
 
 }

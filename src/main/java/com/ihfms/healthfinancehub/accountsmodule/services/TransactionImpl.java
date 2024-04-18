@@ -27,7 +27,7 @@ public class TransactionImpl {
         Date currentDate = new Date(System.currentTimeMillis());
 
         // Convert to java.sql.Date
-        java.sql.Date sqlDate = new java.sql.Date(currentDate.getTime());
+        Date sqlDate = new Date(currentDate.getTime());
 
 
         long transactionId= random.nextLong(100);

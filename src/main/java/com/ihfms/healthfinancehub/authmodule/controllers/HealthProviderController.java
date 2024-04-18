@@ -17,7 +17,7 @@ public class HealthProviderController {
         this.healthProviderService = healthProviderService;
     }
 
-    @GetMapping
+    @PostMapping
     public User registerProvider(
         @RequestParam(required = false) String username,
         @RequestParam(required = false) String email,
