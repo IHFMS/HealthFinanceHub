@@ -6,7 +6,6 @@ import com.ihfms.healthfinancehub.utils.SecondaryDb;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,7 +20,7 @@ public class TransactionImpl implements TransactionService {
         this.accountsRepo = accountsRepo;
     }
 
-    public void captureTransaction(Long patientId, Double amount) {
+    public void captureTransaction(Invoice invoice) {
 
         Random random = new Random();
         Date currentDate = new Date(System.currentTimeMillis());
@@ -29,13 +28,9 @@ public class TransactionImpl implements TransactionService {
         // Convert to java.sql.Date
         Date sqlDate = new Date(currentDate.getTime());
 
-
         long transactionId= random.nextLong(100);
-        Invoice invoice=new Invoice();
         invoice.setInvoiceId(transactionId);
-        invoice.setAmount(amount);
         invoice.setIssueDate(sqlDate);
-        invoice.setPatientId(patientId);
         invoice.setIsPaid(false);
 
         accountsRepo.generateInvoice(invoice);

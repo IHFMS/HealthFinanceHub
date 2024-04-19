@@ -12,8 +12,8 @@ public class TransactionDecorator implements TransactionService{
     }
 
     @Override
-    public void captureTransaction(Long patientId, Double amount) {
-        transactionService.captureTransaction(patientId, amount);
+    public void captureTransaction(Invoice invoice) {
+        transactionService.captureTransaction(invoice);
     }
 
     @Override

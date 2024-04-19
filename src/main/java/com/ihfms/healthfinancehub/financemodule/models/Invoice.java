@@ -11,6 +11,7 @@ public class Invoice {
     private Date issueDate;
     private Date dueDate;
     Boolean isPaid;
+    private String patientName;
     private Long patientId;
 
 }

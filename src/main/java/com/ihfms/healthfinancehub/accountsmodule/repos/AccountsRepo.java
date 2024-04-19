@@ -2,7 +2,6 @@ package com.ihfms.healthfinancehub.accountsmodule.repos;
 
 import com.ihfms.healthfinancehub.entities.datasource.DBConfig;
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
-import com.ihfms.healthfinancehub.utils.SecondaryDb;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -45,7 +44,7 @@ public class AccountsRepo {
 
         List<Invoice> invoiceList = new ArrayList<>();
 
-        String sql = "SELECT * FROM invoice;";
+        String sql = "SELECT invoice.*, patient.* FROM invoice INNER JOIN patient ON invoice.patient_id_fk = patient.patient_id;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -62,6 +61,7 @@ public class AccountsRepo {
                 invoice.setIssueDate(resultSet.getDate("issue_date"));
                 invoice.setDueDate(resultSet.getDate("due_date"));
                 invoice.setPatientId(resultSet.getLong("patient_id_fk"));
+                invoice.setPatientName(resultSet.getString("patient_name"));
                 invoice.setIsPaid(resultSet.getBoolean("is_paid"));
 
                 // add the invoice to the list
@@ -81,7 +81,7 @@ public class AccountsRepo {
         List<Invoice> invoiceList = new ArrayList<>();
         int pending = 0;
 
-        String sql = "SELECT * FROM invoice WHERE is_paid = ?;";
+        String sql = "SELECT invoice.*, patient.* FROM invoice INNER JOIN patient ON invoice.patient_id_fk = patient.patient_id WHERE is_paid = ?;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -99,6 +99,7 @@ public class AccountsRepo {
                 invoice.setIssueDate(resultSet.getDate("issue_date"));
                 invoice.setDueDate(resultSet.getDate("due_date"));
                 invoice.setPatientId(resultSet.getLong("patient_id_fk"));
+                invoice.setPatientName(resultSet.getString("patient_name"));
                 invoice.setIsPaid(resultSet.getBoolean("is_paid"));
 
                 pending++;
@@ -121,7 +122,7 @@ public class AccountsRepo {
         List<Invoice> invoiceList = new ArrayList<>();
         int notPending = 0;
 
-        String sql = "SELECT * FROM invoice WHERE is_paid = ?;";
+        String sql = "SELECT invoice.*, patient.* FROM invoice INNER JOIN patient ON invoice.patient_id_fk = patient.patient_id WHERE is_paid = ?;";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -139,6 +140,7 @@ public class AccountsRepo {
                 invoice.setIssueDate(resultSet.getDate("issue_date"));
                 invoice.setDueDate(resultSet.getDate("due_date"));
                 invoice.setPatientId(resultSet.getLong("patient_id_fk"));
+                invoice.setPatientName(resultSet.getString("patient_name"));
                 invoice.setIsPaid(resultSet.getBoolean("is_paid"));
 
                 notPending++;

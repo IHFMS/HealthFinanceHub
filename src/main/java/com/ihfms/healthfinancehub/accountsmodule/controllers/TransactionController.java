@@ -15,6 +15,7 @@
 package com.ihfms.healthfinancehub.accountsmodule.controllers;
 
 import com.ihfms.healthfinancehub.accountsmodule.services.TransactionImpl;
+import com.ihfms.healthfinancehub.accountsmodule.services.TransactionLoggingDecorator;
 import com.ihfms.healthfinancehub.financemodule.models.Invoice;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,17 +27,18 @@ import java.util.List;
 public class TransactionController {
 
     private final TransactionImpl transaction;
+    private final TransactionLoggingDecorator loggingDecorator;
 
-    public TransactionController(TransactionImpl transaction) {
+    public TransactionController(TransactionImpl transaction, TransactionLoggingDecorator loggingDecorator) {
         this.transaction = transaction;
+        this.loggingDecorator = loggingDecorator;
     }
 
     @PostMapping("/capture-invoice")
     public void captureInvoice(
-            @RequestParam Long patientId,
-            @RequestParam Double amount
+            @RequestBody Invoice invoice
     ){
-        transaction.captureTransaction(patientId, amount);
+        loggingDecorator.captureTransaction(invoice);
     }
 
     @GetMapping("/all")

@@ -8,7 +8,7 @@ public class MobileMoney implements Billing
     @Override
     public void ProcessPayment()
     {
-        System.out.print("PhoneNumber:");
+        System.out.print("yuo have choswen mm");
         var phoneNumber = scan.nextBigInteger();
     }
 }

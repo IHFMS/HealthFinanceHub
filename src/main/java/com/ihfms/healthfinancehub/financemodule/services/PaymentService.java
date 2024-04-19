@@ -22,6 +22,7 @@ public class PaymentService
     }
     public void selectPayment(@RequestBody PaymentInfo paymentInfo) throws SQLException {
         String mode = paymentInfo.getPaymentMode();
+
         switch(mode)
         {
             case "mobile":

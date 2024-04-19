@@ -8,7 +8,7 @@ public class Card implements Billing
     @Override
     public void ProcessPayment()
     {
-        System.out.print("CardNumber:");
+        System.out.print("you have chosen Card");
         var cardNumber = scan.nextBigInteger();
     }
 }
