@@ -15,13 +15,13 @@ public class InvoiceService {
 
         UUID uuid = UUID.randomUUID();
 
-        Invoice invoice = new Invoice();
-        invoice.setInvoiceId(uuid.toString());
-        invoice.setIssueDate(LocalDate.now());
-        invoice.setDueDate(LocalDate.of(2024, 12, 1));
-        invoice.setAmount(1000.0);
+//        Invoice invoice = new Invoice();
+//        invoice.setInvoiceId(uuid.toString());
+//        invoice.setIssueDate(LocalDate.now());
+//        invoice.setDueDate(LocalDate.of(2024, 12, 1));
+//        invoice.setAmount(1000.0);
 
-        return invoice;
+        return null;
     }
 
 }

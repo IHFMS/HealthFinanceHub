@@ -2,15 +2,13 @@ package com.ihfms.healthfinancehub.authmodule.controllers;
 
 import com.ihfms.healthfinancehub.authmodule.models.usermodels.User;
 import com.ihfms.healthfinancehub.authmodule.services.HealthProviderService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
 @RestController
 @RequestMapping("health-hub/health-provider")
+@CrossOrigin(origins = "http://localhost:3000")
 public class HealthProviderController {
 
     private final HealthProviderService healthProviderService;
@@ -19,7 +17,7 @@ public class HealthProviderController {
         this.healthProviderService = healthProviderService;
     }
 
-    @GetMapping
+    @PostMapping
     public User registerProvider(
         @RequestParam(required = false) String username,
         @RequestParam(required = false) String email,
