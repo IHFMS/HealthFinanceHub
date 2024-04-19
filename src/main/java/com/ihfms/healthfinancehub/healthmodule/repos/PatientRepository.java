@@ -16,7 +16,6 @@ public class PatientRepository implements PatientRepositoryInterface {
     DBConfig dbConfig = DBConfig.getInstance();
     Connection conn = dbConfig.getConnection();
 
-
     @Override
     public List<Patient> getPatientDetails() {
         List<Patient> patientList = new ArrayList<>();
