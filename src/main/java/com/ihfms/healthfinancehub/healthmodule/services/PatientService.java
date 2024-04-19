@@ -23,7 +23,6 @@ public class PatientService {
         return patientRepository.getPatientDetails();
     }
 
-    public void addPatientRecord(Long patientId, String diagnosis, List<String> prescriptions) {
-        patientRepository.addRecord(patientId, diagnosis, prescriptions);
-    }
+
+
 }

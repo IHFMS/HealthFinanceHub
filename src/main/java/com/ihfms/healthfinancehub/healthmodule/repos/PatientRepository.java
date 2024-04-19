@@ -53,19 +53,4 @@ public class PatientRepository implements PatientRepositoryInterface {
         }
     }
 
-    @Override
-    public void addRecord(Long patientId, String diagnosis, List<String> prescriptions) {
-        String sql = "INSERT INTO medical_record (record_id, diagnosis, prescriptions, patient_id_fk) VALUES (?, ?, ?, ?);";
-        try {
-            PreparedStatement statement = conn.prepareStatement(sql);
-            Random rand = new Random();
-            statement.setLong(1, rand.nextLong(100));
-            statement.setLong(4, patientId);
-            statement.setString(2, diagnosis);
-            statement.setString(3, prescriptions.get(0));
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
