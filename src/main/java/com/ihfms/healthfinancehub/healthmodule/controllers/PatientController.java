@@ -27,23 +27,7 @@ public class PatientController {
         return patientService.getPatientList();
     }
 
-    @GetMapping("/get-records")
-    public List<MedicalRecord> getRecords(){
-        return patientService.getRecordList();
-    }
 
-    @GetMapping("/get-record/{patient_id}")
-    public MedicalRecord getRecordById(@PathVariable("patient_id") Long patientId){
-        return patientService.getMedicalRecord(patientId);
-    }
 
-    @PostMapping("/add-record/{patient_id}")
-    public void addMedicalRecord(
-            @PathVariable("patient_id") Long patientId,
-            @RequestParam String diagnosis,
-            @RequestParam List<String> prescriptions
-    ){
-        patientService.addPatientRecord(patientId, diagnosis, prescriptions);
-    }
 
 }
